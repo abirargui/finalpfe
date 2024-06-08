@@ -1,42 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 export interface Project {
-  idP: number;
-  nom: string;
+  id: number;
+  name: string;
   description: string;
-  dateDebut: string;
-  dateFin: string;
-  nbr_heures_travailler: number;
-  status: string;
-  tache: string;
 }
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
 
-  private apiUrl = 'http://your-api-url.com/projects'; // Remplacez par l'URL de votre API
+  private projectsUrl = 'api/projects';  // URL de l'API des projets
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.apiUrl);
+    return this.http.get<Project[]>(this.projectsUrl)
+      .pipe(
+        catchError(this.handleError<Project[]>('getProjects', []))
+      );
   }
 
-  getProject(id: number): Observable<Project> {
-    return this.http.get<Project>(`${this.apiUrl}/${id}`);
-  }
+  // Ajoutez les autres méthodes pour ajouter, modifier et supprimer un projet ici
 
-  addProject(project: Project): Observable<Project> {
-    return this.http.post<Project>(this.apiUrl, project);
-  }
-
-  updateProject(project: Project): Observable<Project> {
-    return this.http.put<Project>(`${this.apiUrl}/${project.idP}`, project);
-  }
-
-  deleteProject(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  /** Gère les erreurs HTTP */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      // Retourne un résultat vide pour que l'application continue de fonctionner
+      return of(result as T);
+    };
   }
 }

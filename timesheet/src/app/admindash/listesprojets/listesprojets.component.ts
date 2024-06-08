@@ -1,29 +1,43 @@
-import { Component, OnInit} from '@angular/core';
-import { Project, ProjectService } from 'src/app/services/project.service';
+import { Component} from '@angular/core';
+import { Project } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-listesprojets',
   templateUrl: './listesprojets.component.html',
   styleUrls: ['./listesprojets.component.css']
 })
-export class ListesprojetsComponent implements OnInit {
-editProject(_t6: Project) {
-throw new Error('Method not implemented.');
-}
-deleteProject(arg0: number) {
-throw new Error('Method not implemented.');
-}
+export class ListesprojetsComponent  {
   projects: Project[] = [];
+  newProjectName: string = '';
+  newProjectDescription: string = '';
+  editingProject: Project | null = null;
 
-  constructor(private projectService: ProjectService) {}
-
-  ngOnInit(): void {
-    this.loadProjects();
+  addProject() {
+    const newProject: Project = {
+      id: this.projects.length + 1,
+      name: this.newProjectName,
+      description: this.newProjectDescription
+    };
+    this.projects.push(newProject);
+    this.newProjectName = '';
+    this.newProjectDescription = '';
   }
 
-  loadProjects(): void {
-    this.projectService.getProjects().subscribe(projects => {
-      this.projects = projects;
-    });
+  editProject(project: Project) {
+    this.editingProject = { ...project };
+  }
+
+  updateProject() {
+    if (this.editingProject) {
+      const index = this.projects.findIndex(p => p.id === this.editingProject!.id);
+      if (index !== -1) {
+        this.projects[index] = this.editingProject;
+      }
+      this.editingProject = null;
+    }
+  }
+
+  deleteProject(id: number) {
+    this.projects = this.projects.filter(project => project.id !== id);
   }
 }

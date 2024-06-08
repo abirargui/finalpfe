@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -27,7 +26,7 @@ export class ConnexionComponent {
     this.userService.login(this.credentials).subscribe(
       response => {         
         alert(response.msg);
-        this.router.navigate(['/userdash']);
+        this.router.navigate(['/admindash']);
       },
       error => {
           alert(error.error.err)

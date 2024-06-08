@@ -10,9 +10,12 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { ListesprojetsComponent } from './listesprojets/listesprojets.component';
 import { ListesemplyesComponent } from './listesemplyes/listesemplyes.component';
 import { MainComponent } from './main/main.component';
-import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProjectFormComponent } from './project-form/project-form.component';
+import { HeaderComponent } from './header/header.component';
+import { ClientsComponent } from './clients/clients.component';
+import { FormsModule } from '@angular/forms'; 
+
+
 
 
 @NgModule({
@@ -23,15 +26,18 @@ import { ProjectFormComponent } from './project-form/project-form.component';
     ListesemplyesComponent,
     MainComponent,
     HeaderComponent,
-    ProjectFormComponent,
-   
+    ClientsComponent,
+    
+
+
     
    
   ],
   imports: [
     CommonModule,
     AdmindashRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
    
    
   ]

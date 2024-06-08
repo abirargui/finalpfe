@@ -39,8 +39,12 @@ export class InscriptionComponent{
       alert('Passwords do not match');
       return;
     }
-    if (!/^[a-zA-Z]+$/.test(this.utilisateur.nom) || !/^[a-zA-Z]+$/.test(this.utilisateur.prenom)) {
-      alert('Le champ nom et le champ prénom doivent contenir uniquement des lettres alphabétiques.');
+    if (!/^[a-zA-Z]+$/.test(this.utilisateur.nom) ) {
+      alert('Le champ nom  doivent contenir uniquement des lettres alphabétiques.');
+      return;
+    }
+    if (!/^[a-zA-Z]+$/.test(this.utilisateur.prenom)){
+      alert('Le le champ prénom doivent contenir uniquement des lettres alphabétiques.');
       return;
     }
     if (!/.+@.+/.test(this.utilisateur.email)) {

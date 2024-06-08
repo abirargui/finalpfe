@@ -1,17 +1,7 @@
 
-h2{
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: #AAA;
-
-  padding: 30px;
-}
 .container {
 height: 100vh;
-background-color: #203354;
+background-color: rgb(1, 38, 69);
 
 }
 

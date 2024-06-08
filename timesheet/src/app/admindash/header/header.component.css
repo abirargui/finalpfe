@@ -1,34 +1,47 @@
 .header {
-    height: 70px;
-    padding: 20px 50px;
-    background-color: rgb(1, 38, 69);
-    color: #fff;
     display: flex;
-    justify-content: space-between;
-    box-shadow: 5px 5px 5px #939393;
-  }
-  
-  .header .logo {
-    font-weight: bold;
+    justify-content: space-between; /* Space out the logo and user section */
+    align-items: center; /* Center items vertically */
+    padding: 20px 50px; /* Adjust padding as needed */
+    background-color: rgb(1, 38 , 69); /* Background color for the header */
+    border-bottom: 1px solid #e0e0e0; /* Optional: border at the bottom */
+}
+
+.logo {
     font-size: 20px;
-  }
-  
-  .header .user {
-    display: flex;
-    align-items: center;
     font-weight: bold;
-  }
-  
-  .header .user .user-image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    background-color: rgb(11, 107, 185);
-    margin-left: 20px;
+    color: #fff;
+}
+
+.user {
     display: flex;
     align-items: center;
+}
+
+.user-name {
+    margin-right: 10px; /* Space between the user name and image */
+    font-size: 1em;
+    color: #fff;
+    font-weight: bold;
+}
+
+.user-image {
+    display: flex;
     justify-content: center;
-    font-weight: bold;
-  }
-  
+    align-items: center;
+}
+
+.user-image img {
+    border-radius: 50%; /* Makes the image circular */
+    width: 40px; /* Adjust the size as needed */
+    height: 40px; /* Ensures the image is square */
+    object-fit: cover; /* Ensures the image covers the entire area without distortion */
+    border: 2px solid #e0e0e0; /* Optional: Adds a border around the image */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Optional: Adds a transition effect */
+}
+
+.user-image img:hover {
+    transform: scale(1.1); /* Optional: Scales the image up slightly on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: Increases the shadow on hover */
+}

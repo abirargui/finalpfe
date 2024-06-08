@@ -4,11 +4,11 @@ import { ReviewService } from 'src/app/services/review.service';
 
 export interface Client {
   id: number;
-  name: string;
+  nom: string;
   email: string;
-  review: string;
-  project: string;
-  rating: number;
+  revoir: string;
+  projet: string;
+  notation: number;
   photoUrl: string; // Ajout du champ photoUrl
 }
 
@@ -20,11 +20,11 @@ export interface Client {
 export class ClientProfileComponent {
   client: Client = {
     id: 0,
-    name: '',
+    nom: '',
     email: '',
-    review: '',
-    project: '',
-    rating: 0,
+    revoir: '',
+    projet: '',
+    notation: 0,
     photoUrl: '' // Ajout du champ photoUrl
   };
   selectedFile: File | null = null;
@@ -55,11 +55,11 @@ export class ClientProfileComponent {
     this.reviewService.addReview(this.client);
     this.client = {
       id: 0,
-      name: '',
+      nom: '',
       email: '',
-      review: '',
-      project: '',
-      rating: 0,
+      revoir: '',
+      projet: '',
+      notation: 0,
       photoUrl: ''
     };
     this.selectedFile = null;

@@ -1,16 +1,18 @@
-:host {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+.main-container {
+  display: flex;
+  .side-nav {
+    width: 350px;
+    min-width: 230px;
+    min-height: calc(100vh - 70px);
+    background-color: #113c60;
+    color: #fff;
+    box-shadow: 5px 5px 5px #939393;
+    @media only screen and (max-width: 1300px) {
+      width: 100px;
+      min-width: 100px;
+    }
   }
-  
-  mat-drawer {
-    width: 260px;
+  .main {
+    padding: 30px;
   }
-  mat-drawer-container {
-    height: 100%;
-  }
-  
-  mat-drawer {
-    background: #1976d2;
-  }
+}

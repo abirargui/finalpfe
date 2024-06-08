@@ -7,9 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./userdash.component.css']
 })
 export class UserdashComponent {
-  sideBarOpen = true;
+  title = 'user-dashboard';
 
-  sideBarToggler() {
-    this.sideBarOpen = !this.sideBarOpen;
-  }
+  constructor() {}
+
 }
