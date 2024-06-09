@@ -1,0 +1,20 @@
+/* src/app/dashboard/dashboard.component.css */
+
+:host {
+    display: block;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  app-employee-profile {
+    display: flex;
+    justify-content: center;
+  }
+  

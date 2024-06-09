@@ -1,0 +1,36 @@
+<div>
+    <form  (ngSubmit)="addProject()">                                                   
+        <div>
+          <label for="nom">Nom:</label>
+          <input type="text" id="nom" [(ngModel)]="newProject.nom" name="nom" required>
+        </div>
+        <div>
+          <label for="description">Description:</label>
+          <input type="text" id="description" [(ngModel)]="newProject.description" name="description" required>
+        </div>
+        <div>
+          <label for="dateDebut">Date Début:</label>
+          <input type="date" id="dateDebut" [(ngModel)]="newProject.dateDebut" name="dateDebut" required>
+        </div>
+        <div>
+          <label for="dateFin">Date Fin:</label>
+          <input type="date" id="dateFin" [(ngModel)]="newProject.dateFin" name="dateFin" required>
+        </div>
+        <div>
+          <label for="nbr_heures_travailler">Nombre d'heures travaillées:</label>
+          <input type="number" id="nbr_heures_travailler" [(ngModel)]="newProject.nbr_heures_travailler" name="nbr_heures_travailler" required>
+        </div>
+        <div>
+          <label for="status">Status:</label>
+          <select id="status" [(ngModel)]="newProject.status" name="status" required>
+            <option value="activer">Activer</option>
+            <option value="desactiver">Désactiver</option>
+          </select>
+        </div>
+        <div>
+          <label for="tache">Tâche:</label>
+          <input type="text" id="tache" [(ngModel)]="newProject.tache" name="tache" required>
+        </div>
+        <button type="submit">Ajouter</button>
+      </form>
+</div>

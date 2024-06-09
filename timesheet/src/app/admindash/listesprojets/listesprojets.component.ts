@@ -8,19 +8,25 @@ import { Project } from 'src/app/services/project.service';
 })
 export class ListesprojetsComponent  {
   projects: Project[] = [];
-  newProjectName: string = '';
-  newProjectDescription: string = '';
+  newProject: Project = this.getEmptyProject();
   editingProject: Project | null = null;
 
-  addProject() {
-    const newProject: Project = {
+  getEmptyProject(): Project {
+    return {
       id: this.projects.length + 1,
-      name: this.newProjectName,
-      description: this.newProjectDescription
+      nom: '',
+      description: '',
+      dateDebut: '',
+      dateFin: '',
+      nbr_heures_travailler: 0,
+      status: '',
+      tache: ''
     };
-    this.projects.push(newProject);
-    this.newProjectName = '';
-    this.newProjectDescription = '';
+  }
+
+  addProject() {
+    this.projects.push({ ...this.newProject, id: this.projects.length + 1 });
+    this.newProject = this.getEmptyProject();
   }
 
   editProject(project: Project) {
@@ -39,5 +45,4 @@ export class ListesprojetsComponent  {
 
   deleteProject(id: number) {
     this.projects = this.projects.filter(project => project.id !== id);
-  }
-}
+  }}

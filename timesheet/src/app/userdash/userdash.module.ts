@@ -13,6 +13,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { ProjectsManagmentComponent } from './projects-managment/projects-managment.component';
+import { ReportsComponent } from './reports/reports.component';
+import { TimesheetEntryComponent } from './timesheet-entry/timesheet-entry.component';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EmployeeProfileComponent } from './employee-profile/employee-profile.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,11 @@ import { MatListModule } from '@angular/material/list';
     HeaderComponent,
     DashboardComponent,
     HomeComponent,
-    SidenavComponent
+    SidenavComponent,
+    ProjectsManagmentComponent,
+    ReportsComponent,
+    TimesheetEntryComponent,
+    EmployeeProfileComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +41,8 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatDividerModule,
     MatListModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class UserdashModule { }

@@ -1,1 +1,45 @@
-<h1>Hello abir </h1>
+<div>
+    <h2>Liste des employés</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Date de Naissance</th>
+          <th>Téléphone</th>
+          <th>Date d'Embauche</th>
+          <th>Rôle</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{ employee.id }}</td>
+          <td *ngIf="!editingEmployee || editingEmployee.id !== employee.id">{{ employee.nom }}</td>
+          <td *ngIf="!editingEmployee || editingEmployee.id !== employee.id">{{ employee.prenom }}</td>
+          <td *ngIf="!editingEmployee || editingEmployee.id !== employee.id">{{ employee.email }}</td>
+          <td *ngIf="!editingEmployee || editingEmployee.id !== employee.id">{{ employee.datenais }}</td>
+          <td *ngIf="!editingEmployee || editingEmployee.id !== employee.id">{{ employee.telephone }}</td>
+          <td *ngIf="!editingEmployee || editingEmployee.id !== employee.id">{{ employee.dateemboche }}</td>
+          <td *ngIf="!editingEmployee || editingEmployee.id !== employee.id">{{ employee.role }}</td>
+          <td *ngIf="editingEmployee && editingEmployee.id === employee.id">
+            <input type="text" [(ngModel)]="editingEmployee.nom" name="editNom">
+            <input type="text" [(ngModel)]="editingEmployee.prenom" name="editPrenom">
+            <input type="email" [(ngModel)]="editingEmployee.email" name="editEmail">
+            <input type="date" [(ngModel)]="editingEmployee.datenais" name="editDatenais">
+            <input type="text" [(ngModel)]="editingEmployee.telephone" name="editTelephone">
+            <input type="date" [(ngModel)]="editingEmployee.dateemboche" name="editDateemboche">
+            <input type="text" [(ngModel)]="editingEmployee.role" name="editRole">
+          </td>
+          <td>
+            <button *ngIf="!editingEmployee || editingEmployee.id !== employee.id" (click)="editEmployee(employee)">Modifier</button>
+            <button *ngIf="!editingEmployee || editingEmployee.id !== employee.id" (click)="deleteEmployee(employee.id)">Supprimer</button>
+            <button *ngIf="editingEmployee && editingEmployee.id === employee.id" (click)="updateEmployee()">Enregistrer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

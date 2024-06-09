@@ -1,1 +1,43 @@
-<p>clients works!</p>
+<div>
+    <h2>Liste des clients</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Projet</th>
+          <th>Notation</th>
+          <th>Revoir</th>
+          <th>Photo</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{ client.idC }}</td>
+          <td *ngIf="!editingClient || editingClient.idC !== client.idC">{{ client.nom }}</td>
+          <td *ngIf="!editingClient || editingClient.idC !== client.idC">{{ client.email }}</td>
+          <td *ngIf="!editingClient || editingClient.idC !== client.idC">{{ client.projet }}</td>
+          <td *ngIf="!editingClient || editingClient.idC !== client.idC">{{ client.notation }}</td>
+          <td *ngIf="!editingClient || editingClient.idC !== client.idC">{{ client.revoir }}</td>
+          <td *ngIf="!editingClient || editingClient.idC !== client.idC">
+            <img [src]="client.photo" alt="Photo de {{ client.nom }}" width="50">
+          </td>
+          <td *ngIf="editingClient && editingClient.idC === client.idC">
+            <input type="text" [(ngModel)]="editingClient.nom" name="editNom">
+            <input type="email" [(ngModel)]="editingClient.email" name="editEmail">
+            <input type="text" [(ngModel)]="editingClient.projet" name="editProjet">
+            <input type="number" [(ngModel)]="editingClient.notation" name="editNotation" min="0" max="5">
+            <input type="text" [(ngModel)]="editingClient.revoir" name="editRevoir">
+            <input type="text" [(ngModel)]="editingClient.photo" name="editPhoto">
+          </td>
+          <td>
+            <button *ngIf="!editingClient || editingClient.idC !== client.idC" (click)="editClient(client)">Modifier</button>
+            <button *ngIf="!editingClient || editingClient.idC !== client.idC" (click)="deleteClient(client.idC)">Supprimer</button>
+            <button *ngIf="editingClient && editingClient.idC === client.idC" (click)="updateClient()">Enregistrer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>

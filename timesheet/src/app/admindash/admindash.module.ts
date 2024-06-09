@@ -13,7 +13,8 @@ import { MainComponent } from './main/main.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { ClientsComponent } from './clients/clients.component';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { AjouterProjetComponent } from './ajouter-projet/ajouter-projet.component'; 
 
 
 
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     MainComponent,
     HeaderComponent,
     ClientsComponent,
+    AjouterProjetComponent,
     
 
 

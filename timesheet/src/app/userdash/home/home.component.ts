@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
+  selectedEmployeeId = 1; // Id de l'employé à afficher
 }

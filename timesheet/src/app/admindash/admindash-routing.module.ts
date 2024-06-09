@@ -5,6 +5,7 @@ import { MainComponent } from './main/main.component';
 import { ListesemplyesComponent } from './listesemplyes/listesemplyes.component';
 import { ListesprojetsComponent } from './listesprojets/listesprojets.component';
 import { ClientsComponent } from './clients/clients.component';
+import { AjouterProjetComponent } from './ajouter-projet/ajouter-projet.component';
 
 
 const routes: Routes = [{ path: '', component: AdmindashComponent ,
@@ -14,8 +15,10 @@ const routes: Routes = [{ path: '', component: AdmindashComponent ,
     { path: 'listesemplyes', component: ListesemplyesComponent },
     { path: 'listesprojets', component: ListesprojetsComponent },
     { path: 'clients', component: ClientsComponent },
+    {path:'ajouter-projet',component:AjouterProjetComponent}
   ]
-}
+},
+
 ];
 
 @NgModule({

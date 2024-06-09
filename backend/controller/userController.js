@@ -77,54 +77,35 @@ exports.UserLogin = (req, res) => {
     });
 }
 
-exports.ForgetPassword = (req, res) => {
+// methode ppour mot de passe oublier et envoie de nouveau mot de passe au mail avec nodemailer
+
+exports.forgotPassword = async (req, res) => {
     const { email } = req.body;
-
-    if (!email) {
-        return res.status(400).send('Email is required');
+    const user = await db.query('SELECT * FROM utilisateurs WHERE email = ?', [email]);
+    if (!user) {
+        return res.status(404).json({ msg: 'User not found' });
     }
-
-    db.query('SELECT * FROM utilisateurs WHERE email = ?', [email], (err, result) => {
-        if (err) throw err;
-
-        if (result.length === 0) {
-            return res.status(400).json('No user found with this email');
+    const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '10m' });
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
         }
-
-        const utilisateur = result[0];
-        const token = Math.random().toString(36).substr(2); // Generate a random token
-        const resetPasswordLink = `http://localhost:4200/reset-password?token=${token}`;
-
-        // Store token in the database with an expiry time
-        const expiry = new Date();
-        expiry.setHours(expiry.getHours() + 1); // Token expires in 1 hour
-
-        db.query('UPDATE utilisateurs SET reset_password_token = ?, reset_password_expires = ? WHERE email = ?', [token, expiry, email], (err, result) => {
-            if (err) throw err;
-
-            // Send email with the reset password link
-            const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: 'your_email@gmail.com',
-                    pass: 'your_email_password'
-                }
-            });
-
-            const mailOptions = {
-                from: 'your_email@gmail.com',
-                to: email,
-                subject: 'Password Reset',
-                text: `Click the following link to reset your password: ${resetPasswordLink}`
-            };
-
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    return res.status(500).json({msg :'Error sending email'});
-                } else {
-                    return res.status(200).json({msg :'Password reset link sent to your email'});
-                }
-            });
-        });
+    });
+    const mailOptions = {
+        from: process.env.EMAIL,
+        to: email,
+        subject: 'Reset Password',
+        text: `Click on the following link to reset your password: ${process.env.CLIENT_URL}/reset-password/${token}`
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ msg: 'Failed to send email' });
+        } else {
+            console.log('Email sent: ' + info.response);
+            return res.status(200).json({ msg: 'Email sent successfully' });
+        }
     });
 }
