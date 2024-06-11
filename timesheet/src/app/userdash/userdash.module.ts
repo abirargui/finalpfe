@@ -5,7 +5,6 @@ import { UserdashRoutingModule } from './userdash-routing.module';
 import { UserdashComponent } from './userdash.component';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HomeComponent } from './home/home.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -18,19 +17,20 @@ import { ReportsComponent } from './reports/reports.component';
 import { TimesheetEntryComponent } from './timesheet-entry/timesheet-entry.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EmployeeProfileComponent } from './employee-profile/employee-profile.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
     UserdashComponent,
     HeaderComponent,
     DashboardComponent,
-    HomeComponent,
     SidenavComponent,
     ProjectsManagmentComponent,
     ReportsComponent,
     TimesheetEntryComponent,
-    EmployeeProfileComponent
+   
   ],
   imports: [
     CommonModule,
@@ -42,7 +42,11 @@ import { EmployeeProfileComponent } from './employee-profile/employee-profile.co
     MatDividerModule,
     MatListModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatTableModule
+   
   ]
 })
 export class UserdashModule { }

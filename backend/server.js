@@ -791,7 +791,9 @@ app.delete('/gestionnaire/supprimer/:idG', (req, res) => {
             res.send('Gestionnaire deleted successfully')
         }
     })
-})
+});
+// Route to fetch all employees
+app.get('/utilisateurs', (req, res) => { let sql = 'SELECT * FROM utilisateurs'; db.query(sql, (err, results) => { if (err) throw err; res.json(results); }); });
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
