@@ -228,8 +228,8 @@ app.post('/forgot-password', (req, res) => {
 })
 
 // route pour affiche le projet et les information de client et les information de tache et les information de employe avec le jointure entre le quatre tables
-app.get('/projets', (req, res) => {
-    db.query('SELECT projet.nom, projet.description, projet.datedebut, projet.datefin, projet.nbr_heures_travailler,projet.status, client.nom, client.email, employe.avatar, tache.nom, tache.description FROM projet \
+app.get('/projet', (req, res) => {
+    db.query('SELECT projet.nom, projet.description, projet.datedebut, projet.datefin, projet.nbr_heures_travailler,projet.status,projet.tache,projet.idP, client.nom, client.email, employe.avatar, tache.nom, tache.description FROM projet \
     INNER JOIN client ON projet.idC = client.id \
     INNER JOIN employe ON projet.idE = employe.id \
     INNER JOIN tache ON projet.idT = tache.id', (err, result) => {
@@ -349,20 +349,20 @@ app.use('/projet', userRoutes)
 
 // Route pour ajouter un projet
 app.post('/projet/new', (req, res) => {
-  const { nom, description, idE, idT, idC, dateDebut, dateFin, nbr_heures_travailler, status, tache } = req.body;
-  db.query('INSERT INTO projet (nom, description, idE, idT, idC, dateDebut, dateFin, nbr_heures_travailler, status, tache) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-  [nom, description, idE, idT, idC, dateDebut, dateFin, nbr_heures_travailler, status, tache],
+  const { nom, description, idE, idT, idC, datedebut, datefin, nbr_heures_travailler, status, tache } = req.body;
+  db.query('INSERT INTO projet (nom, description, idE, idT, idC, datedebut, datefin, nbr_heures_travailler, status, tache) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+  [nom, description, idE, idT, idC, datedebut, datefin, nbr_heures_travailler, status, tache],
   (err, result) => {
-      if (!nom || !description || !idE || !idT || !idC || !dateDebut || !dateFin || !nbr_heures_travailler || !status || !tache) {
+      if (!nom || !description || !idE || !idT || !idC || !datedebut || !datefin || !nbr_heures_travailler || !status || !tache) {
           return res.status(400).send('Tous les champs doivent être renseignés');
       }
 // Vérifier si la date de début est inférieure à la date de fin
-      if (new Date(dateDebut) > new Date(dateFin)) {
+      if (new Date(datedebut) > new Date(datefin)) {
           return res.status(400).send('La date de début doit être inférieure à la date de fin');
       }
 
       // Vérifier si la date de début est supérieure ou égale à la date d'aujourd'hui actuelle
-      if (new Date(dateDebut) <= new Date()) {
+      if (new Date(datedebut) <= new Date()) {
           return res.status(400).send('La date de début doit être supérieure à la date d\'aujourd\'hui');
       }
       if (err) {
@@ -375,21 +375,21 @@ app.post('/projet/new', (req, res) => {
 // methode pour modifier un projet par son id
 app.put('/projet/modifier/:idP', (req, res) => {
     const { idP } = req.params;
-    const { nom, description, idE, idT, idC, dateDebut, dateFin, nbr_heures_travailler, status, tache } = req.body;
-    db.query('UPDATE projet SET nom = ?, description = ?, idE = ?, idT = ?, idC = ?, dateDebut = ?, dateFin = ?, nbr_heures_travailler = ?, status = ?, tache = ? WHERE idP = ?',
-    [nom, description, idE, idT, idC, dateDebut, dateFin, nbr_heures_travailler, status, tache, idP],
+    const { nom, description, idE, idT, idC, datedebut, datefin, nbr_heures_travailler, status, tache } = req.body;
+    db.query('UPDATE projet SET nom = ?, description = ?, idE = ?, idT = ?, idC = ?, datedebut = ?, datefin = ?, nbr_heures_travailler = ?, status = ?, tache = ? WHERE idP = ?',
+    [nom, description, idE, idT, idC, datedebut, datefin, nbr_heures_travailler, status, tache, idP],
     (err, result) => {
         // le validation des champs
-        if (!nom || !description || !idE || !idT || !idC || !dateDebut || !dateFin || !nbr_heures_travailler || !status || !tache) {
+        if (!nom || !description || !idE || !idT || !idC || !datedebut || !datefin || !nbr_heures_travailler || !status || !tache) {
             return res.status(400).send('Tous les champs doivent être renseignés');
         }
         // Vérifier si la date de début est inférieure à la date de fin
-        if (new Date(dateDebut) > new Date(dateFin)) {
+        if (new Date(datedebut) > new Date(datefin)) {
             return res.status(400).send('La date de début doit être inférieure à la date de fin');
         }
 
         // Vérifier si la date de début est supérieure ou égale à la date d'aujourd'hui actuelle
-        if (new Date(dateDebut) <= new Date()) {
+        if (new Date(datedebut) <= new Date()) {
             return res.status(400).send('La date de début doit être supérieure à la date d\'aujourd\'hui');
         }
         if (err) {

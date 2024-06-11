@@ -14,10 +14,10 @@ router.get("/produits", (req, res) => {
     });
 });
 router.post("/projet", (req, res) => {
-    const { nom, description, dateDebut, dateFin, nbr_heures_travailler, status, tache } = req.body;
+    const { nom, description, datedebut, datefin, nbr_heures_travailler, status, tache } = req.body;
     db.query(   
-        "INSERT INTO projet (nom, description, dateDebut, dateFin, nbr_heures_travailler, status, tache) VALUES (?, ?, ?, ?, ?, ?, ?)",
-        [nom, description, dateDebut, dateFin, nbr_heures_travailler, status, tache],
+        "INSERT INTO projet (nom, description, datedebut, datefin, nbr_heures_travailler, status, tache) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [nom, description, datedebut, datefin, nbr_heures_travailler, status, tache],
         (err, result) => {
             if (err) {
                 console.log(err);

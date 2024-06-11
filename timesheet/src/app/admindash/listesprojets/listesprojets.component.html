@@ -2,7 +2,7 @@
 
   <h3>Ajouter un nouveau projet</h3>
 
-      <button type="submit" (click)="addProject()">Ajouter</button>
+  <button routerLink="/admindash/ajouter-projet" routerLinkActive> Ajouter</button>
 
   <h2>Liste des projets</h2>
   <table>
@@ -21,19 +21,19 @@
     </thead>
     <tbody>
       <tr *ngFor="let project of projects">
-        <td>{{ project.id }}</td>
-        <td *ngIf="!editingProject || editingProject.id !== project.id">{{ project.nom }}</td>
-        <td *ngIf="!editingProject || editingProject.id !== project.id">{{ project.description }}</td>
-        <td *ngIf="!editingProject || editingProject.id !== project.id">{{ project.dateDebut }}</td>
-        <td *ngIf="!editingProject || editingProject.id !== project.id">{{ project.dateFin }}</td>
-        <td *ngIf="!editingProject || editingProject.id !== project.id">{{ project.nbr_heures_travailler }}</td>
-        <td *ngIf="!editingProject || editingProject.id !== project.id">{{ project.status }}</td>
-        <td *ngIf="!editingProject || editingProject.id !== project.id">{{ project.tache }}</td>
-        <td *ngIf="editingProject && editingProject.id === project.id">
+        <td>{{ project.idP }}</td>
+        <td *ngIf="!editingProject || editingProject.idP !== project.idP">{{ project.nom }}</td>
+        <td *ngIf="!editingProject || editingProject.idP !== project.idP">{{ project.description }}</td>
+        <td *ngIf="!editingProject || editingProject.idP !== project.idP">{{ project.datedebut }}</td>
+        <td *ngIf="!editingProject || editingProject.idP !== project.idP">{{ project.datefin }}</td>
+        <td *ngIf="!editingProject || editingProject.idP !== project.idP">{{ project.nbr_heures_travailler }}</td>
+        <td *ngIf="!editingProject || editingProject.idP !== project.idP">{{ project.status }}</td>
+        <td *ngIf="!editingProject || editingProject.idP !== project.idP">{{ project.tache }}</td>
+        <td *ngIf="editingProject && editingProject.idP === project.idP">
           <input type="text" [(ngModel)]="editingProject.nom" name="editNom">
           <input type="text" [(ngModel)]="editingProject.description" name="editDescription">
-          <input type="date" [(ngModel)]="editingProject.dateDebut" name="editDateDebut">
-          <input type="date" [(ngModel)]="editingProject.dateFin" name="editDateFin">
+          <input type="date" [(ngModel)]="editingProject.datedebut" name="editdatedebut">
+          <input type="date" [(ngModel)]="editingProject.datefin" name="editdatefin">
           <input type="number" [(ngModel)]="editingProject.nbr_heures_travailler" name="editNbr_heures_travailler">
           <select [(ngModel)]="editingProject.status" name="editStatus">
             <option value="activer">Activer</option>
@@ -42,9 +42,9 @@
           <input type="text" [(ngModel)]="editingProject.tache" name="editTache">
         </td>
         <td>
-          <button *ngIf="!editingProject || editingProject.id !== project.id" (click)="editProject(project)">Modifier</button>
-          <button *ngIf="!editingProject || editingProject.id !== project.id" (click)="deleteProject(project.id)">Supprimer</button>
-          <button *ngIf="editingProject && editingProject.id === project.id" (click)="updateProject()">Enregistrer</button>
+          <button *ngIf="!editingProject || editingProject.idP !== project.idP" (click)="editProject(project)">Modifier</button>
+          <button *ngIf="!editingProject || editingProject.idP !== project.idP" (click)="deleteProject(project.idP)">Supprimer</button>
+          <button *ngIf="editingProject && editingProject.idP === project.idP" (click)="updateProject()">Enregistrer</button>
         </td>
       </tr>
     </tbody>

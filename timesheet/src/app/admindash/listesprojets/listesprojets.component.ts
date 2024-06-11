@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { Project } from 'src/app/services/project.service';
+import { Project, ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-listesprojets',
@@ -8,26 +8,24 @@ import { Project } from 'src/app/services/project.service';
 })
 export class ListesprojetsComponent  {
   projects: Project[] = [];
-  newProject: Project = this.getEmptyProject();
+  // newProject: Project = this.getEmptyProject();
   editingProject: Project | null = null;
 
-  getEmptyProject(): Project {
-    return {
-      id: this.projects.length + 1,
-      nom: '',
-      description: '',
-      dateDebut: '',
-      dateFin: '',
-      nbr_heures_travailler: 0,
-      status: '',
-      tache: ''
-    };
+   constructor( private projectService: ProjectService) {
+     
+  };
+    
+  ngOnInit(): void {
+    this.projectService.getProjects().subscribe(data => {
+      this.projects = data;
+      console.log(data)
+    });
   }
 
-  addProject() {
-    this.projects.push({ ...this.newProject, id: this.projects.length + 1 });
-    this.newProject = this.getEmptyProject();
-  }
+  // addProject() {
+  //   this.projects.push({ ...this.newProject, id: this.projects.length + 1 });
+  //   this.newProject = this.getEmptyProject();
+  // }
 
   editProject(project: Project) {
     this.editingProject = { ...project };
@@ -35,7 +33,7 @@ export class ListesprojetsComponent  {
 
   updateProject() {
     if (this.editingProject) {
-      const index = this.projects.findIndex(p => p.id === this.editingProject!.id);
+      const index = this.projects.findIndex(p => p.idP === this.editingProject!.idP);
       if (index !== -1) {
         this.projects[index] = this.editingProject;
       }
@@ -44,5 +42,5 @@ export class ListesprojetsComponent  {
   }
 
   deleteProject(id: number) {
-    this.projects = this.projects.filter(project => project.id !== id);
+    this.projects = this.projects.filter(project => project.idP !== id);
   }}

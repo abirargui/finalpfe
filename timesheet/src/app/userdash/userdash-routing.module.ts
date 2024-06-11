@@ -8,7 +8,7 @@ import { ProjectsManagmentComponent } from './projects-managment/projects-managm
 
 const routes: Routes = [{ path: '', component: UserdashComponent ,
   children:[
-    { path: '', redirectTo: '/userdash/home', pathMatch: 'full' },
+    { path: '', redirectTo: '/userdash/dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'projects-managment', component:ProjectsManagmentComponent},
     { path:'reports',component:ReportsComponent},

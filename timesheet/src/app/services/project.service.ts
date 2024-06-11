@@ -3,11 +3,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable,  of } from 'rxjs';
 export interface Project {
-  id: number;
+  idP: number;
+  idE: number;
+  idT:number;
+  idC:number;
   nom: string;
   description: string;
-  dateDebut: string;
-  dateFin: string;
+  datedebut: any;
+  datefin: any;
+  nbr_heures_travailler: number;
+  status: string;
+  tache: string;
+}
+
+export interface proj {
+  
+  nom: string;
+  description: string;
+  datedebut: any;
+  datefin: any;
   nbr_heures_travailler: number;
   status: string;
   tache: string;
@@ -17,7 +31,7 @@ export interface Project {
 })
 export class ProjectService {
 
-  private projectsUrl = 'api/projects'; 
+  private projectsUrl = 'http://localhost:3000/projet'; 
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }; // URL de l'API des projets
@@ -30,15 +44,15 @@ export class ProjectService {
         catchError(this.handleError<Project[]>('getProjects', []))
       );
   }
-  addProject(project: Project): Observable<Project> {
-    return this.http.post<Project>(this.projectsUrl, project, this.httpOptions)
+  addProject(proj: proj): Observable<Project> {
+    return this.http.post<Project>(`${this.projectsUrl}/new`, proj, this.httpOptions)
       .pipe(
         catchError(this.handleError<Project>('addProject'))
       );
   }
 
   updateProject(project: Project): Observable<any> {
-    const url = `${this.projectsUrl}/${project.id}`;
+    const url = `${this.projectsUrl}/${project.idP}`;
     return this.http.put(url, project, this.httpOptions)
       .pipe(
         catchError(this.handleError<any>('updateProject'))
